@@ -1,0 +1,42 @@
+{% comment %}
+  Accepts 2 arguments: object, label
+{% endcomment %}
+
+<div class='rounded-md bg-slate-900 text-sm text-green-400 m-2 p-4 font-mono'>
+  <div class='flex'>
+    <div class='flex-shrink-0'>
+      {% comment %} Heroicon name: mini/command-line {% endcomment %}
+      <svg
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke-width='1.5'
+        stroke='currentColor'
+        class='w-6 h-6'
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+      </svg>
+    </div>
+    <div class='ml-3 flex-1 '>
+      <p class='font-mono'>
+        crappy log > <strong>{{ label }}</strong>
+      </p>
+      <ul class='my-3 md:mt-0 md:ml-6'>
+        {%- liquid
+          case object
+            when null
+              echo '<li>type > <strong>null</strong></li>'
+            when ''
+              echo "<li>type > <strong>''</strong></li>"
+            when empty
+              echo '<li>type > <strong>empty</strong></li>'
+            when blank
+              echo '<li>type > <strong>blank</strong></li>'
+            else
+              echo '<li>print > <strong>' | append: object | append: '</strong></li>'
+          endcase
+        -%}
+      </ul>
+      <p>// end log</p>
+    </div>
+  </div>
+</div>
